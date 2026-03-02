@@ -1,0 +1,22 @@
+class Solution {
+    public int trap(int[] height) {
+        int trappedWater = 0;
+        int left_boundry[] = new int[height.length];
+        int right_boundry[] = new int[height.length];
+
+        left_boundry[0] = height[0];
+        right_boundry[height.length - 1] = height[height.length - 1];
+
+        for(int i = 1; i < height.length; i++){
+            left_boundry[i] = Math.max(height[i] , left_boundry[i - 1]);
+        }
+        for(int i = height.length - 2; i >= 0; i--){
+            right_boundry[i] = Math.max(height[i] , right_boundry[i + 1]);
+        }
+        for(int i = 0; i < height.length; i++){
+            int water_level = Math.min(left_boundry[i], right_boundry[i]);
+            trappedWater += (water_level - height[i]) * 1;
+        }
+        return trappedWater;
+    }
+}
