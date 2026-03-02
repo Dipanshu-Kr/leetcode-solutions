@@ -1,0 +1,27 @@
+class Solution {
+    public int heightChecker(int[] heights) {
+       int n = heights.length;
+        int count = 0;
+        int expected[] = new int[n];
+        for(int i = 0; i < n; i++){
+            expected[i] = heights[i];
+        }
+        for(int i = 1; i < n; i++){
+            int unsorted = i;
+            for(int j = i; j > 0; j--){
+                if(heights[unsorted] < heights[j - 1]){
+                    int temp = heights[unsorted];
+                    heights[unsorted] = heights[j - 1];
+                    heights[j - 1] = temp;
+                    unsorted = j - 1;
+                }
+            }
+        }
+        for(int i = 0; i < n; i++){
+           if(heights[i] != expected[i]){
+            count++;
+           }
+        }
+        return count; 
+    }
+}
