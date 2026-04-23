@@ -1,0 +1,37 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int spiral[][] = new int[n][n];
+        int start_row = 0;
+        int end_row = spiral.length - 1;
+        int start_col = 0;
+        int end_col = spiral[0].length - 1;
+        int count = 1;
+
+        while(start_row <= end_row && start_col <= end_col){
+            for(int j = start_col; j <= end_col; j++){
+                spiral[start_row][j] = count++;
+            }
+            for(int i = start_row + 1; i <= end_row; i++){
+                spiral[i][end_col] = count++;
+            }
+            for(int j = end_col - 1; j >= start_col; j--){
+                if(start_row == end_row){
+                    break;
+                }
+                spiral[end_row][j] = count++;
+            }
+            for(int i = end_row - 1; i > start_row; i--){
+                if(start_col == end_col){
+                    break;
+                }
+                spiral[i][start_col] = count++;
+            }
+            start_row++;
+            start_col++;
+            end_row--;
+            end_col--;
+        }
+        return spiral;
+
+    }
+}
